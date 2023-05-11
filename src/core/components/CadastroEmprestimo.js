@@ -64,19 +64,21 @@ const CadastroEmprestimo = (props) => {
   };
 
   const handleEmprestimo = async () => {
+    debugger;
     try {
       const response = await fetch("http://localhost:5000/emprestimos", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          matricula_aluno: 7,
-          registro_livro: 3
+          matricula_aluno: selectedAluno,
+          registro_livro: selectedLivro
         })
 
       });
-
+      console.log(selectedAluno)
+      console.log(selectedLivro)
       if (response.ok) {
         alert("Empréstimo cadastrado com sucesso!");
         props.atualizaEmprestimo();
@@ -93,7 +95,7 @@ const CadastroEmprestimo = (props) => {
 
   const handleCadastroEmprestimoWrapper = async () => {
     try {
-      await handleEmprestimo({ matricula_aluno: alunos.matricula, autor: livros.registro });
+      await handleEmprestimo({ matricula_aluno: selectedAluno.matricula, autor: selectedAluno.registro });
       handleClose();
     } catch (err) {
       console.error(err);
@@ -115,7 +117,7 @@ const CadastroEmprestimo = (props) => {
               <InputLabel>Aluno</InputLabel>
               <Select value={selectedAluno} onChange={handleSelectAluno}>
                 {alunos.map((aluno) => (
-                  <MenuItem key={aluno.matricula} value={aluno.nome}>
+                  <MenuItem key={aluno.matricula} value={aluno.matricula}>
                     {aluno.matricula} - {aluno.nome}
                   </MenuItem>
                 ))}
@@ -126,7 +128,7 @@ const CadastroEmprestimo = (props) => {
               <InputLabel>Livro</InputLabel>
               <Select value={selectedLivro} onChange={handleSelectLivro}>
                 {livros.map((livro) => (
-                  <MenuItem key={livro.registro} value={livro.titulo}>
+                  <MenuItem key={livro.registro} value={livro.registro}>
                     {livro.registro} - {livro.titulo}
                   </MenuItem>
                 ))}

@@ -7,7 +7,6 @@ import Emprestimos from './pages/Emprestimos';
 
 function App() {
   return (
-
     <BrowserRouter>
       <NavBar />
       <Routes>
@@ -17,8 +16,6 @@ function App() {
         <Route path="/emprestimos" element={<Emprestimos />} />
       </Routes>
     </BrowserRouter>
-
-
   );
 }
 
